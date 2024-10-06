@@ -1,0 +1,22 @@
+backend/
+│
+├── src/
+│   ├── main/
+│   │   ├BlogPackage/
+│   │   ├── controllers/
+│   │   │   ├── AuthController.java      // Handles /signup and /login
+│   │   │   └── BlogController.java      // Handles /newContent, /allBlogs, /blog:id
+│   │   ├── models/
+│   │   │   ├── User.java                // Represents User model
+│   │   │   └── Post.java                // Represents Post model
+│   │   ├── repositories/
+│   │   │   ├── UserRepository.java      // Handles DB interaction for User
+│   │   │   └── PostRepository.java      // Handles DB interaction for Post
+│   │   ├── services/
+│   │   │   ├── AuthService.java         // Logic for signup/login
+│   │   │   └── BlogService.java         // Logic for blog handling
+│   │   │└── Main.java                   // Main HTTP server, starts app
+│   │
+│   └── resources/
+│       └── db/
+│           └── schema.sql               // Optional: SQL file to set up your tables
