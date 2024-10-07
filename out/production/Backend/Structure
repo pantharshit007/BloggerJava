@@ -12,9 +12,9 @@ backend/
 │   │   ├── repositories/
 │   │   │   ├── UserRepository.java      // Handles DB interaction for User
 │   │   │   └── PostRepository.java      // Handles DB interaction for Post
-│   │   ├── services/
-│   │   │   ├── AuthService.java         // Logic for signup/login
-│   │   │   └── BlogService.java         // Logic for blog handling
+│   │   ├── middleware/
+│   │   │   ├── AuthMiddleware.java      //
+│   │   │   └──                          //
 │   │   │└── Main.java                   // Main HTTP server, starts app
 │   │
 │   └── resources/

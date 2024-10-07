@@ -16,6 +16,10 @@ public class User {
     }
 
     //getters
+    public String getId() {
+        return id;
+    }
+
     public String getEmail(){
         return  email;
     }

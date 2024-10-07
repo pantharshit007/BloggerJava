@@ -9,8 +9,8 @@ import java.sql.SQLException;
 public class UserRepository {
     private final Connection connection;
 
-    public UserRepository(Connection connect){
-        this.connection = connect;
+    public UserRepository(Connection connection){
+        this.connection = connection;
     }
 
     public void createUser(User user) {
@@ -26,7 +26,7 @@ public class UserRepository {
         }
     }
 
-    public User findUserByEmail(String email) throws SQLException{
+    public User userLogin(String email) throws SQLException{
         String query = "SELECT * FROM users where email = ?";
         PreparedStatement statement = connection.prepareStatement(query);
 

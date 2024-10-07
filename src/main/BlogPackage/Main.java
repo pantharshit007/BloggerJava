@@ -6,15 +6,25 @@ import com.sun.net.httpserver.HttpServer;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.InetSocketAddress;
+import java.sql.Connection;
 import java.sql.SQLException;
 
 import main.BlogPackage.controllers.AuthController;
 import main.BlogPackage.controllers.BlogController;
+import main.BlogPackage.db.DatabaseConnection;
+import main.BlogPackage.db.Table;
 
 
 public class Main {
     public static void main(String[] args) throws IOException {
         HttpServer server = HttpServer.create(new InetSocketAddress(8000), 0);
+
+        Connection connection = DatabaseConnection.getConnection();
+        // Create Table in DB
+        /*
+         Table tableManager = new Table(connection);
+         tableManager.createTables();
+       */
 
         server.createContext("/", new HttpHandler() {
             @Override
@@ -27,18 +37,24 @@ public class Main {
             }
         });
 
-        // Route for user authentication (signup/login)
+        // user authentication (signup/login)
         try {
-            server.createContext("/signup", new AuthController()::signup);
-            server.createContext("/login", new AuthController()::login);
-        } catch (SQLException e) {
+            AuthController authController = new AuthController(connection);
+            server.createContext("/signup", authController::signup);
+            server.createContext("/login", authController::login);
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
-        // Route for blog operations (create, fetch all, fetch specific)
-        server.createContext("/newContent", new BlogController()::newContent);
-        server.createContext("/allBlogs", new BlogController()::allBlogs);
-        server.createContext("/blog", new BlogController()::getBlogById);
+        // Blog routes
+        try{
+            BlogController blogController = new BlogController(connection);
+            server.createContext("/newContent", blogController::newContent);
+            server.createContext("/allBlogs", blogController::allBlogs);
+            server.createContext("/blog", blogController::getBlogById);
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
 
         server.setExecutor(null);
         server.start();
