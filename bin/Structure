@@ -13,9 +13,13 @@ backend/
 │   │   │   ├── UserRepository.java      // Handles DB interaction for User
 │   │   │   └── PostRepository.java      // Handles DB interaction for Post
 │   │   ├── middleware/
-│   │   │   ├── AuthMiddleware.java      //
+│   │   │   ├── AuthMiddleware.java      // User authentication
 │   │   │   └──                          //
-│   │   │└── Main.java                   // Main HTTP server, starts app
+│   │   ├── db/
+│   │   │   ├── DatabaseConnection.java  // Connection Database
+│   │   │   └── Table.java               // User/Post table
+│   │   │   
+│   │   └── Main.java                   // Main HTTP server, starts app
 │   │
 │   └── resources/
 │       └── db/
